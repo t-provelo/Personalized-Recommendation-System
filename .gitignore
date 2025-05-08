@@ -1,5 +1,17 @@
+# Python virtual environment
 venv/
-     __pycache__/
-     *.pyc
-     .DS_Store
-     *.sqlite
+
+# Generated files
+movies.db
+movies_index.faiss
+movies_embeddings.npy
+
+# Python cache
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store
+
+# VSCode
+.vscode/
