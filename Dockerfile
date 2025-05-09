@@ -19,7 +19,7 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 
 # Install setuptools and wheel with pinned version
-RUN pip install --no-cache-dir setuptools==68.2.2 wheel
+RUN pip install --no-cache-dir setuptools==65.5.0 wheel
 
 # Copy requirements.txt
 COPY requirements.txt .
