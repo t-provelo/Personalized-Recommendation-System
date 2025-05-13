@@ -4,7 +4,7 @@ FROM python:3.12-slim
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies for faiss-cpu, pandas, and Rust
+# Install system dependencies for faiss-cpu, pandas, Rust, and build tools
 RUN apt-get update && apt-get install -y \
     libatlas-base-dev \
     gfortran \
@@ -12,19 +12,21 @@ RUN apt-get update && apt-get install -y \
     liblapack-dev \
     curl \
     swig \
+    gcc \
+    python3-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Rust
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 
-# Install setuptools and wheel with pinned version
-RUN pip install --no-cache-dir setuptools==65.5.0 wheel
+# Install setuptools, wheel, and numpy binary
+RUN pip install --no-cache-dir setuptools==74.1.2 wheel==0.44.0 numpy==1.24.3
 
 # Copy requirements.txt
 COPY requirements.txt .
 
-# Install Python dependencies
+# Install remaining Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy project files
